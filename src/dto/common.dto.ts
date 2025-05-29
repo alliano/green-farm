@@ -4,7 +4,12 @@ export interface FindAllDto {
   limit?: string;
   offset?: string;
   search?: string;
-  order_by?: string;
+  order_by?: OrderBy;
+}
+
+enum OrderBy {
+    asc,
+    desc
 }
 
 
@@ -15,8 +20,8 @@ export interface ResponseData<T> {
 
 
 
-export interface PaginationResult<T> extends ResponseData<T> {
-  payload: T;
+export interface PaginationResult<T> {
+  payload: Array<T>;
   properties: PagingProperties;
 }
 

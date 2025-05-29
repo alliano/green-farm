@@ -10,5 +10,7 @@ export interface RegisterRequestDto extends DTO {
   role: Role;
 }
 
-export interface UpdateUserRequestDto extends RegisterRequestDto {}
+export interface UpdateUserRequestDto extends RegisterRequestDto {
+    uuid: string;
+}
 

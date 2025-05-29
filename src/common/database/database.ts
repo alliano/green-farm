@@ -41,6 +41,40 @@ export class Database extends PrismaClient<Prisma.PrismaClientOptions, "info" | 
     
     onModuleInit() {
         console.info("database conetion initialization...")
+        this.$extends({
+            query: {
+                $allModels: {
+                    async findMany({args, model, operation, query}){
+                        args.where = {...args.where, deleted_at: null}
+                        return query(args);
+                    },
+                    async create({args, model, operation, query}){
+                        args.data = {...args.data, crated_at: Math.floor(Date.now() / 1000)}
+                        return query(args);
+                    },
+                    async findUnique({args, model, operation, query}){
+                        args.where = {...args.where, deleted_at: null}
+                        return query(args);
+                    },
+                    async delete({args, model, operation, query}){
+                        return this[model].update({
+                            where: args.where,
+                            data: {
+                                deleted_at: Math.floor(Date.now() / 1000)
+                            }
+                        })
+                    },
+                    async deleteMany({args, model, operation, query}){
+                        return this[model].updateMany({
+                            where: args.where,
+                            data: {
+                                deleted_at: Math.floor(Date.now() / 1000)
+                            }
+                        })
+                    },
+                }
+            }
+        })
         this.$on("query", (event) => console.log(event));
         this.$on("info", (event) => console.log(event));
         this.$on("warn", (event) => console.log(event));

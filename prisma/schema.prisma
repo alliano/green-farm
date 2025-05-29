@@ -22,10 +22,12 @@ model User {
   email      String @db.VarChar(255)
   password   String @db.VarChar(255)
   role       Role   @default(USER)
+  crated_at  Int?    @db.Integer
+  updated_at Int?   @db.Integer
+  deleted_at Int?   @db.Integer
 
   @@map("users")
 }
-
 
 enum Role {
   USER
