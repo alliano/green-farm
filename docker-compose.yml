@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: db-green-farmer
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      - POSTGRES_USER=alliano
+      - POSTGRES_PASSWORD=alliano123
+      - POSTGRES_DB=green_farmer
+    volumes:
+      - type: volume
+        target: /var/lib/postgresql/data
+        source: green_farmer
+volumes:
+  green_farmer: {}
+networks:
+  green_farmer: 
+    driver: bridge
