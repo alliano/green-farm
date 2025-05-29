@@ -4,6 +4,7 @@ import { ZodValidator } from './validation/zodValidator.service';
 
 @Global()
 @Module({
-  providers: [Database, ZodValidator]
+  providers: [Database, ZodValidator],
+  exports: [Database, ZodValidator]
 })
 export class CommonModule {}

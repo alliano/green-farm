@@ -9,7 +9,7 @@ export class Database extends PrismaClient<Prisma.PrismaClientOptions, "info" | 
         super({
             datasources: {
                 db: {
-                    url: process.env.DATABASE
+                    url: process.env.DATABASE_URL
                 }
             },
             log: [
