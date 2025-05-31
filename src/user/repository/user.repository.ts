@@ -64,4 +64,12 @@ export class UserRepository implements CrudRepository<DTO> {
          },
       });
    }
+
+   public async findByEmail(email: string): Promise<User | null> {
+      return await this.database.user.findFirst({
+         where: {
+            email: email
+         }
+      })
+   }
 }

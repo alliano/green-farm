@@ -3,7 +3,7 @@ import { FindAllDto } from "src/dto/common.dto";
 interface CrudOperation<T> {
     create(request: T): Promise<any>;
     update(request: T): Promise<any>;
-    delete(uuid: T): Promise<any>;
+    delete(uuid: string): Promise<any>;
     findAll(request: FindAllDto): Promise<any>;
     findByUuid(uuid: string): Promise<any>;
 }
