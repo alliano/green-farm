@@ -31,7 +31,7 @@ export class Database extends PrismaClient<Prisma.PrismaClientOptions, "query" |
             },
          ],
       })
-      this.$extends({
+      const extensions = this.$extends({
          query: {
             $allModels: {
                async findMany({ args, model, operation, query }) {
@@ -72,6 +72,7 @@ export class Database extends PrismaClient<Prisma.PrismaClientOptions, "query" |
       this.$on('info', (event) => console.log(event));
       this.$on('warn', (event) => console.log(event));
       this.$on('error', (event) => console.log(event));
+      Object.assign(this, extensions)
    }
 
    onModuleDestroy() {
