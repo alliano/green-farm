@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Param, Post, Query, UseFilters } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Inject, Param, Post, Query, UseFilters } from '@nestjs/common';
 import { Role } from '@prisma/client';
 import { BadRequestException } from 'src/common/exceptions/badRequest.exception';
 import { ResponseData } from 'src/dto/common.dto';
@@ -6,16 +6,17 @@ import { RegisterRequestDto } from 'src/dto/user.dto';
 import { UserService } from './user.service';
 import { ErrorFilter } from 'src/common/error/error.filter';
 
-@Controller('user')
+@Controller('/user')
 @UseFilters(ErrorFilter)
 export class UserController {
-
-
-  @Inject()
-  private readonly userService: UserService;
-
-
+   
+   
+   @Inject()
+   private readonly userService: UserService;
+   
+   
    @Post("/register")
+   @HttpCode(HttpStatus.CREATED)
    public async register(@Body() request: RegisterRequestDto, @Query('type') type: string): Promise<ResponseData<void>> {
       switch (type) {
          case Role.BUYER:

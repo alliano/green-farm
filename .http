@@ -1,0 +1,11 @@
+##### REGISTER
+POST http://127.0.0.1:3000/user/register?type=SELLER HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "first_name": "Audia",
+    "last_name": "Naila",
+    "email": "dekenay@gmail.com",
+    "password": "123"
+}
