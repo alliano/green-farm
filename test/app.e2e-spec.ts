@@ -30,6 +30,7 @@ describe('AppController (e2e)', () => {
       }
 
       const response = await request(app.getHttpServer()).post("/user/register?type=BUYER").send(user);
+      console.log(response.body)
       expect(response.status).toBe(HttpStatus.CREATED)
     })
   });
