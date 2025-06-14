@@ -41,7 +41,7 @@ export class UserRepository implements CrudRepository<DTO> {
          this.database.user.count(),
          this.database.user.findMany({
             skip: skip,
-            take: page,
+            take: limit,
             orderBy: {
                uuid: request.order_by.toString() == 'desc' ? 'desc' : 'asc',
             },

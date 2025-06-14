@@ -1,7 +1,7 @@
-import { Body, Controller, HttpCode, HttpStatus, Inject, Param, Post, Query, UseFilters } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, Query, UseFilters } from '@nestjs/common';
 import { Role } from '@prisma/client';
 import { BadRequestException } from 'src/common/exceptions/badRequest.exception';
-import { ResponseData } from 'src/dto/common.dto';
+import { FindAllDto, OrderBy, ResponseData } from 'src/dto/common.dto';
 import { RegisterRequestDto } from 'src/dto/user.dto';
 import { UserService } from './user.service';
 import { ErrorFilter } from 'src/common/error/error.filter';
@@ -46,7 +46,9 @@ export class UserController {
       };
    }
 
-   public async findAll(): Promise<any> {
-
+   @Get("/")
+   public async findAll(@Query() request: FindAllDto): Promise<any> {
+      request.order_by = request.order_by ?? OrderBy.desc
+      return this.userService.findAll(request)
    }
 }

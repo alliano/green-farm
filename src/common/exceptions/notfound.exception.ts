@@ -1,9 +1,10 @@
+import { HttpException, HttpStatus } from '@nestjs/common';
 import { ErrorResponseDTO } from 'src/dto/common.dto';
 
-export class NorFoundException extends Error {
+export class NotFoundException extends HttpException {
    private errors: ErrorResponseDTO;
    constructor(message: string) {
-      super(message);
+      super(message, HttpStatus.NOT_FOUND);
       this.errors = {
          message: 'Data tidak ditemukan',
          errors: [

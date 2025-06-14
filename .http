@@ -9,3 +9,7 @@ Content-Type: application/json
     "email": "dekenay@gmail.com",
     "password": "123"
 }
+
+##### GET ALL USERS
+GET http://127.0.0.1:3000/user
+Accept: application/json

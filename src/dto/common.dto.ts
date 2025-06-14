@@ -7,7 +7,7 @@ export interface FindAllDto {
   order_by?: OrderBy;
 }
 
-enum OrderBy {
+export enum OrderBy {
     asc,
     desc
 }
@@ -43,3 +43,8 @@ type ErrorDetail = {
     message: string;
 }
 
+export interface PaginationResponse<T> {
+  message: string;
+  payload: T;
+  properties: PagingProperties
+}
