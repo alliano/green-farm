@@ -18,6 +18,7 @@ export class UserRepository implements CrudRepository<DTO> {
       });
    }
    async update(request: UpdateUserRequestDto): Promise<void> {
+      console.log(request)
       this.database.user.update({
          where: {
             uuid: request.uuid,

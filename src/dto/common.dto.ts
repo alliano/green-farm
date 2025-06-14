@@ -25,7 +25,7 @@ export interface PaginationResult<T> {
   properties: PagingProperties;
 }
 
-type PagingProperties = {
+export type PagingProperties = {
   page: number;
   page_size: number;
   total_page: number;
@@ -41,10 +41,4 @@ export type ErrorResponseDTO = {
 type ErrorDetail = {
     type: string;
     message: string;
-}
-
-export interface PaginationResponse<T> {
-  message: string;
-  payload: T;
-  properties: PagingProperties
 }

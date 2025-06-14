@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CrudService } from 'src/common/interfaces/crud.interface';
-import { DTO, FindAllDto } from 'src/dto/common.dto';
+import { DTO, FindAllDto, PaginationResult } from 'src/dto/common.dto';
 import { RegisterRequestDto, UpdateUserRequestDto } from 'src/dto/user.dto';
 import { UserRepository } from './repository/user.repository';
 import { ZodValidator } from 'src/common/validation/zodValidator.service';
@@ -39,7 +39,7 @@ export class UserService implements CrudService<DTO> {
     }
 
 
-    async findAll(request: FindAllDto): Promise<any> {
+    async findAll(request: FindAllDto): Promise<PaginationResult<User>> {
         return await this.userRepository.findAll(request);
     }
 

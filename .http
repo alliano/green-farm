@@ -1,4 +1,5 @@
 ##### REGISTER
+
 POST http://127.0.0.1:3000/user/register?type=SELLER HTTP/1.1
 Accept: application/json
 Content-Type: application/json
@@ -11,5 +12,25 @@ Content-Type: application/json
 }
 
 ##### GET ALL USERS
+
 GET http://127.0.0.1:3000/user
 Accept: application/json
+
+##### GET USERS BY ID
+
+GET http://127.0.0.1:3000/user/019725c7-0b5d-7c79-b188-337c532d3990
+Accept: application/json
+
+##### UPDATE USERS
+
+PUT http://127.0.0.1:3000/user/019725c7-0b5d-7c79-b188-337c532d3990
+Accept: application/json
+Content-Type: application/json
+
+{
+    "first_name": "Audia",
+    "last_name": "ENAY",
+    "email": "sample@gmail.com",
+    "password": "123",
+    "role": "INVESTOR"
+}

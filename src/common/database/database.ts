@@ -65,6 +65,13 @@ export class Database extends PrismaClient<Prisma.PrismaClientOptions, "query" |
                      },
                   });
                },
+               async update({args, model, operation, query}){
+                  args.data.updated_at = Math.floor(Date.now() / 1000);
+                  return this[model].update({
+                     where: args.where,
+                     data: {...args.data, updated_at: Math.floor(Date.now() / 1000)}
+                  })
+               }
             },
          },
       });

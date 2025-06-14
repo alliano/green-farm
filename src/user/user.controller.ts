@@ -1,10 +1,12 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, Query, UseFilters } from '@nestjs/common';
-import { Role } from '@prisma/client';
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, Put, Query, UseFilters } from '@nestjs/common';
+import { Role, User } from '@prisma/client';
 import { BadRequestException } from 'src/common/exceptions/badRequest.exception';
 import { FindAllDto, OrderBy, ResponseData } from 'src/dto/common.dto';
-import { RegisterRequestDto } from 'src/dto/user.dto';
+import { RegisterRequestDto, UpdateUserRequestDto } from 'src/dto/user.dto';
 import { UserService } from './user.service';
 import { ErrorFilter } from 'src/common/error/error.filter';
+import { PaginationResponse } from 'src/dto/pagination-response.dto';
+import { HttpResponseDTO } from 'src/dto/http-response.dto';
 
 @Controller('/user')
 @UseFilters(ErrorFilter)
@@ -47,8 +49,23 @@ export class UserController {
    }
 
    @Get("/")
-   public async findAll(@Query() request: FindAllDto): Promise<any> {
+   public async findAll(@Query() request: FindAllDto): Promise<PaginationResponse<User>> {
       request.order_by = request.order_by ?? OrderBy.desc
-      return this.userService.findAll(request)
+      const {payload, properties} = await this.userService.findAll(request);
+      return new PaginationResponse(payload, properties);
+   }
+
+   @Get("/:uuid")
+   public async findById(@Param("uuid") uuid: string): Promise<HttpResponseDTO<User>> {
+      return new HttpResponseDTO<User>(await this.userService.findByUuid(uuid))
+   }
+
+   @Put("/:uuid")
+   public async update(@Body() request: UpdateUserRequestDto, @Param("uuid") uuid: string): Promise<any> {
+      request.uuid = uuid;
+      await this.userService.update(request);
+      return {
+         message: "Berhasil edit"
+      }
    }
 }
